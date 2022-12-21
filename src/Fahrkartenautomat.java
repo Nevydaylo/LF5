@@ -5,6 +5,7 @@ class Fahrkartenautomat {
 
         Scanner tastatur = new Scanner(System.in);
 
+        int anzahl;
         double zuZahlenderBetrag;
         double eingezahlterGesamtbetrag;
         double eingeworfeneMuenze;
@@ -12,8 +13,16 @@ class Fahrkartenautomat {
         double nochZuZahlen;
 
         // 1
-        System.out.print("Zu zahlender Betrag (Euro): ");
-        zuZahlenderBetrag = tastatur.nextDouble();
+        System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
+        anzahl = tastatur.nextInt();
+        while (anzahl < 1 || anzahl > 10) {
+            System.out.println("Ungültiger Wert. Bitte geben Sie eine Zahl zwischen 1 und 10 ein.");
+            System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
+            anzahl = tastatur.nextInt();
+        }
+
+        zuZahlenderBetrag = anzahl * 2.50; // Preis pro Fahrkarte: 2,50 Euro
+        System.out.println("Zu zahlender Betrag (Euro): " + zuZahlenderBetrag);
 
         // 2
         eingezahlterGesamtbetrag = 0.0;
