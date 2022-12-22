@@ -15,20 +15,10 @@ public class GroessterWert {
 
         // Verabeitung
         if ( a > b)  {
-            if ( a > c ) {
-                max = a;
-            }
-            else {
-                max = c;
-            }
+            max = Math.max(a, c);
         }
         else {
-            if (b > c ) {
-                max = b;
-            }
-            else {
-                max = c;
-            }
+            max = Math.max(b, c);
         }
         System.out.println("Der größte eingegebene Wert ist: " + max);
     }
