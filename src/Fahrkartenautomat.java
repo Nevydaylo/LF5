@@ -7,46 +7,66 @@ class Fahrkartenautomat {
         Scanner tastatur = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("#.#");
 
-        int anzahl;
         double zuZahlenderBetrag;
         double eingezahlterGesamtbetrag;
         double eingeworfeneMuenze;
         double rueckgabebetrag;
         double nochZuZahlen;
         int ticketOption;
-
-
-        //Auswahl der Ticket
-        System.out.println("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:");
-        System.out.println("  Kurzstrecke AB [2,00 EUR] (1)");
-        System.out.println("  Einzelfahrschein AB [3,00 EUR] (2)");
-        System.out.println("  Tageskarte AB [8,80 EUR] (3)");
-        System.out.println("  4-Fahrten-Karte AB [9,40 EUR] (4)");
-        System.out.print("Ihre Wahl: ");
-        ticketOption = tastatur.nextInt();
-
+        int ticketQuantity;
         double ticketPrice;
-        if (ticketOption == 1) {
-            ticketPrice = 2.00; // Short trip ticket
-        } else if (ticketOption == 2) {
-            ticketPrice = 3.00; // Single ticket
-        } else if (ticketOption == 3) {
-            ticketPrice = 8.80; // Day ticket
-        } else if (ticketOption == 4) {
-            ticketPrice = 9.40; // 4-trip ticket
-        } else {
-            ticketPrice = 0.0; // Invalid option
-        }
-        // 1
-        System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
-        anzahl = tastatur.nextInt();
-        while (anzahl < 1 || anzahl > 10) {
-            System.out.println("Ungültiger Wert. Bitte geben Sie eine Zahl zwischen 1 und 10 ein.");
-            System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
-            anzahl = tastatur.nextInt();
-        }
+        double totalCost = 0.0;
 
-        zuZahlenderBetrag = anzahl * ticketPrice; // Preis pro Fahrkarte AB usw.
+        // Schleife, bis der Benutzer die Option "Bezahlen" auswählt
+        do {
+            // Anzeige der Ticketoptionen
+            System.out.println("Wählen Sie ihre Wunschfahrkarten für Berlin AB aus:");
+            System.out.println("  Kurzstrecke AB [2,00 EUR] (1)");
+            System.out.println("  Einzelfahrschein AB [3,00 EUR] (2)");
+            System.out.println("  Tageskarte AB [8,80 EUR] (3)");
+            System.out.println("  4-Fahrten-Karte AB [9,40 EUR] (4)");
+            System.out.println("  Bezahlen (9)");
+            System.out.print("Ihre Wahl: ");
+            ticketOption = tastatur.nextInt();
+
+            // Berechnung des Preises des ausgewählten Tickets
+            if (ticketOption == 1) {
+                ticketPrice = 2.00; // Kurzstreckenticket
+            } else if (ticketOption == 2) {
+                ticketPrice = 3.00; // Einzelfahrschein
+            } else if (ticketOption == 3) {
+                ticketPrice = 8.80; // Tageskarte
+            } else if (ticketOption == 4) {
+                ticketPrice = 9.40; // 4-Fahrten-Karte
+            } else {
+                ticketPrice = 0.0; // Ungültige Option
+            }
+
+            // Falls ein gültiges Ticket ausgewählt wurde, Benutzer auffordern, die Anzahl einzugeben
+            if (ticketPrice > 0.0) {
+                System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
+                ticketQuantity = tastatur.nextInt();
+
+                // Überprüfung, ob die eingegebene Anzahl gültig ist
+                while (ticketQuantity < 1 || ticketQuantity > 10) {
+                    System.out.println("Ungültiger Wert. Bitte geben Sie eine Zahl zwischen 1 und 10 ein.");
+                    System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
+                    ticketQuantity = tastatur.nextInt();
+                }
+
+                // Berechnung des Gesamtpreises für die ausgewählten Tickets
+                double ticketCost = ticketQuantity * ticketPrice;
+                totalCost += ticketCost;
+
+                // Anzeige der Zwischensumme
+                System.out.println("Zwischensumme: " + df.format(totalCost) + " €");
+            } else if (ticketOption != 9) {
+                // Falls eine ungültige Ticketoption ausgewählt wurde, Benutzer darauf hinweisen
+                System.out.println("Ungültige Option. Bitte wählen Sie eine der angegebenen Optionen aus.");
+            }
+        } while (ticketOption != 9); // Schleife wird beendet, wenn die Option "Bezahlen" ausgewählt wurde
+
+        zuZahlenderBetrag = totalCost; // Preis pro Fahrkarte AB usw.
         System.out.println("Zu zahlender Betrag (Euro): " + zuZahlenderBetrag);
 
         // 2
@@ -59,15 +79,13 @@ class Fahrkartenautomat {
             eingeworfeneMuenze = tastatur.nextDouble();
             eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
         }
-
         // 3
-        System.out.println("\nFahrschein wird ausgegeben");
+        System.out.println("\nFahrscheine werden ausgegeben");
         for (int i = 0; i < 8; i++) {
             System.out.print("=");
             try {
                 Thread.sleep(200);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -104,10 +122,9 @@ class Fahrkartenautomat {
                 rueckgabebetrag = rueckgabebetrag - 0.05;
             }
         }
-
-        System.out.println("\nVergessen Sie nicht, den Fahrschein\n" + "vor Fahrtantritt entwerten zu lassen!\n"
-                + "Wir wünschen Ihnen eine gute Fahrt.");
-
-        tastatur.close();
+        // 5
+        System.out.println("Danke für ihren Einkauf bei uns.");
+        System.out.println("Bitte entnehmen Sie ihre Fahrscheine.");
     }
 }
+
