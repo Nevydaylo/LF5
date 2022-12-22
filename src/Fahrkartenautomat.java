@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 class Fahrkartenautomat {
     public static void main(String[] args) {
 
         Scanner tastatur = new Scanner(System.in);
+        DecimalFormat df = new DecimalFormat("#.#");
 
         int anzahl;
         double zuZahlenderBetrag;
@@ -11,7 +13,30 @@ class Fahrkartenautomat {
         double eingeworfeneMuenze;
         double rueckgabebetrag;
         double nochZuZahlen;
+        int ticketOption;
 
+
+        //Auswahl der Ticket
+        System.out.println("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:");
+        System.out.println("  Kurzstrecke AB [2,00 EUR] (1)");
+        System.out.println("  Einzelfahrschein AB [3,00 EUR] (2)");
+        System.out.println("  Tageskarte AB [8,80 EUR] (3)");
+        System.out.println("  4-Fahrten-Karte AB [9,40 EUR] (4)");
+        System.out.print("Ihre Wahl: ");
+        ticketOption = tastatur.nextInt();
+
+        double ticketPrice;
+        if (ticketOption == 1) {
+            ticketPrice = 2.00; // Short trip ticket
+        } else if (ticketOption == 2) {
+            ticketPrice = 3.00; // Single ticket
+        } else if (ticketOption == 3) {
+            ticketPrice = 8.80; // Day ticket
+        } else if (ticketOption == 4) {
+            ticketPrice = 9.40; // 4-trip ticket
+        } else {
+            ticketPrice = 0.0; // Invalid option
+        }
         // 1
         System.out.print("Anzahl der Fahrkarten (1 bis 10): ");
         anzahl = tastatur.nextInt();
@@ -21,7 +46,7 @@ class Fahrkartenautomat {
             anzahl = tastatur.nextInt();
         }
 
-        zuZahlenderBetrag = anzahl * 2.50; // Preis pro Fahrkarte: 2,50 Euro
+        zuZahlenderBetrag = anzahl * ticketPrice; // Preis pro Fahrkarte AB usw.
         System.out.println("Zu zahlender Betrag (Euro): " + zuZahlenderBetrag);
 
         // 2
@@ -29,7 +54,7 @@ class Fahrkartenautomat {
         nochZuZahlen = 0.0;
         while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
             nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-            System.out.println("Noch zu zahlen: " + nochZuZahlen);
+            System.out.println("Noch zu zahlen: " + df.format(nochZuZahlen));
             System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
             eingeworfeneMuenze = tastatur.nextDouble();
             eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
