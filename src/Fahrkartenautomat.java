@@ -3,7 +3,7 @@ import java.text.DecimalFormat;
 
 class Fahrkartenautomat {
     public static void main(String[] args) {
-
+        begreussung();
         Scanner tastatur = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("#.#");
 
@@ -72,12 +72,19 @@ class Fahrkartenautomat {
         // 2
         eingezahlterGesamtbetrag = 0.0;
         nochZuZahlen = 0.0;
+        eingeworfeneMuenze = 0.0;
         while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
             nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
             System.out.println("Noch zu zahlen: " + df.format(nochZuZahlen));
-            System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
+            System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
             eingeworfeneMuenze = tastatur.nextDouble();
-            eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
+            if (eingeworfeneMuenze != 5.0 && eingeworfeneMuenze != 10.0 && eingeworfeneMuenze != 20.0
+                    && eingeworfeneMuenze != 1.0 && eingeworfeneMuenze != 2.0) {
+                System.out.println("Ungültig nur 5, 10, 20 Euro Scheine oder 1, 2 Euro Münzen erlaubt.");
+                eingeworfeneMuenze = 0.0;
+            } else {
+                eingezahlterGesamtbetrag += eingeworfeneMuenze;
+            }
         }
         // 3
         System.out.println("\nFahrscheine werden ausgegeben");
@@ -94,7 +101,7 @@ class Fahrkartenautomat {
         // 4
         rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         if (rueckgabebetrag > 0.0) {
-            System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag + " Euro");
+            System.out.println("Der Rückgabebetrag in Höhe von " + df.format(rueckgabebetrag)  + " Euro");
             System.out.println("wird in folgenden Münzen ausgezahlt:");
 
             while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
@@ -126,5 +133,15 @@ class Fahrkartenautomat {
         System.out.println("Danke für ihren Einkauf bei uns.");
         System.out.println("Bitte entnehmen Sie ihre Fahrscheine.");
     }
+
+    public static void begreussung (){
+        System.out.println("Herzlich Wilkommen!");
+        System.out.println();
+    }
+
+
+
 }
+
+
 
