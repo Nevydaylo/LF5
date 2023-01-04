@@ -8,28 +8,10 @@ class Fahrkartenautomat {
         begreussung();
         Scanner tastatur = new Scanner(System.in);
         double zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
-        System.out.println("Zu zahlender Betrag: " + zuZahlenderBetrag + "€ ");
-
-        double eingezahlterGesamtbetrag;
-        double eingeworfeneMuenze;
+        System.out.println("Zu zahlender Betrag: " +  df.format(zuZahlenderBetrag) + "€ ");
+        double eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
         double rueckgabebetrag;
-        double nochZuZahlen;
 
-        // 2
-        eingezahlterGesamtbetrag = 0.0;
-        while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
-            nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-            System.out.println("Noch zu zahlen: " + df.format(nochZuZahlen) + "€ ");
-            System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
-            eingeworfeneMuenze = tastatur.nextDouble();
-            if (eingeworfeneMuenze != 5.0 && eingeworfeneMuenze != 10.0 && eingeworfeneMuenze != 20.0
-                    && eingeworfeneMuenze != 1.0 && eingeworfeneMuenze != 2.0) {
-                System.out.println("Ungültig nur 5, 10, 20 Euro Scheine oder 1, 2 Euro Münzen erlaubt.");
-
-            } else {
-                eingezahlterGesamtbetrag += eingeworfeneMuenze;
-            }
-        }
         // 3
         System.out.println("\nFahrscheine werden ausgegeben");
         for (int i = 0; i < 8; i++) {
@@ -144,7 +126,29 @@ class Fahrkartenautomat {
         return totalCost;
     }
 
+    public static double fahrkartenBezahlen (Scanner tastatur, double zuZahlenderBetrag){
+        DecimalFormat df = new DecimalFormat("#.#");
 
+        double eingeworfeneMuenze;
+        double eingezahlterGesamtbetrag;
+        double nochZuZahlen;
+
+        eingezahlterGesamtbetrag = 0.0;
+        while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
+            nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
+            System.out.println("Noch zu zahlen: " + df.format(nochZuZahlen) + "€ ");
+            System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
+            eingeworfeneMuenze = tastatur.nextDouble();
+            if (eingeworfeneMuenze != 5.0 && eingeworfeneMuenze != 10.0 && eingeworfeneMuenze != 20.0
+                    && eingeworfeneMuenze != 1.0 && eingeworfeneMuenze != 2.0) {
+                System.out.println("Ungültig nur 5, 10, 20 Euro Scheine oder 1, 2 Euro Münzen erlaubt.");
+
+            } else {
+                eingezahlterGesamtbetrag += eingeworfeneMuenze;
+            }
+        }
+            return eingezahlterGesamtbetrag;
+    }
 
 }
 
