@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.text.DecimalFormat;
 
@@ -10,21 +11,11 @@ class Fahrkartenautomat {
         double zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
         System.out.println("Zu zahlender Betrag: " +  df.format(zuZahlenderBetrag) + "€ ");
         double eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
-        double rueckgabebetrag;
+        double rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
+        System.out.println("Rückgabebetrag: " + df.format(rueckgabebetrag) + " €");
+        fahrkartenAusgeben();
 
-        // 3
-        System.out.println("\nFahrscheine werden ausgegeben");
-        for (int i = 0; i < 8; i++) {
-            System.out.print("=");
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("\n\n");
 
-        // 4
         rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         if (rueckgabebetrag > 0.0) {
             System.out.println("Der Rückgabebetrag in Höhe von " + df.format(rueckgabebetrag)  + " €");
@@ -150,6 +141,19 @@ class Fahrkartenautomat {
             return eingezahlterGesamtbetrag;
     }
 
+    public static void fahrkartenAusgeben () {
+
+        System.out.println("\nFahrscheine werden ausgegeben");
+        for (int i = 0; i < 8; i++) {
+            System.out.print("=");
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("\n\n");
+    }
 }
 
 
