@@ -13,42 +13,10 @@ class Fahrkartenautomat {
         double eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
         double rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         System.out.println("Rückgabebetrag: " + df.format(rueckgabebetrag) + " €");
+        rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
+        rueckgeldAusgabe(rueckgabebetrag, eingezahlterGesamtbetrag, zuZahlenderBetrag);
         fahrkartenAusgeben();
 
-
-        rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
-        if (rueckgabebetrag > 0.0) {
-            System.out.println("Der Rückgabebetrag in Höhe von " + df.format(rueckgabebetrag)  + " €");
-            System.out.println("wird in folgenden Münzen ausgezahlt:");
-
-            while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
-                System.out.println("2 Euro");
-                rueckgabebetrag = rueckgabebetrag - 2.0;
-            }
-            while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
-                System.out.println("1 Euro");
-                rueckgabebetrag = rueckgabebetrag - 1.0;
-            }
-            while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
-                System.out.println("50 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.5;
-            }
-            while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
-                System.out.println("20 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.2;
-            }
-            while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
-                System.out.println("10 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.1;
-            }
-            while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
-                System.out.println("5 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.05;
-            }
-        }
-        // 5
-        System.out.println("Danke für ihren Einkauf bei uns.");
-        System.out.println("Bitte entnehmen Sie ihre Fahrscheine.");
     }
 
     public static void begreussung (){
@@ -153,7 +121,44 @@ class Fahrkartenautomat {
             }
         }
         System.out.println("\n\n");
+        System.out.println("Danke für ihren Einkauf bei uns.");
+        System.out.println("Bitte entnehmen Sie ihre Fahrscheine.");
     }
+
+    public static void rueckgeldAusgabe (double rueckgabebetrag, double eingezahlterGesamtbetrag, double zuZahlenderBetrag){
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
+        if (rueckgabebetrag > 0.0) {
+            System.out.println("Der Rückgabebetrag in Höhe von " + df.format(rueckgabebetrag)  + " €");
+            System.out.println("wird in folgenden Münzen ausgezahlt:");
+
+            while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
+                System.out.println("2 Euro");
+                rueckgabebetrag = rueckgabebetrag - 2.0;
+            }
+            while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
+                System.out.println("1 Euro");
+                rueckgabebetrag = rueckgabebetrag - 1.0;
+            }
+            while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
+                System.out.println("50 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.5;
+            }
+            while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
+                System.out.println("20 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.2;
+            }
+            while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
+                System.out.println("10 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.1;
+            }
+            while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
+                System.out.println("5 Cent");
+                rueckgabebetrag = rueckgabebetrag - 0.05;
+            }
+    }
+}
 }
 
 
