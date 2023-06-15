@@ -168,7 +168,8 @@ public class Raumschiff extends Ladung {
     public void nachrichtAnAlle(String message) {
         System.out.println("##########");
         broadcastKommunikator.add(message);
-        logbuchEintraege.add(message);
+        //logbuchEintraege.add(message);
+        System.out.println(message);
 
     }
 
