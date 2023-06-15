@@ -18,18 +18,11 @@ public class Raumschiff extends Ladung {
         meinRaumschiff.zustandRaumschiff();
 
         Ladung ladung1 = new Ladung("Lebensmittel", 50);
-        Ladung ladung2 = new Ladung("Medizin", 20);
         meinRaumschiff.addLadung(ladung1);
-        meinRaumschiff.addLadung(ladung2);
         meinRaumschiff.nachrichtAnAlle("Erster Logbucheintrag");
-        meinRaumschiff.nachrichtAnAlle("Zweiter Logbucheintrag");
+
 
         meinRaumschiff.ladungsverzeichnisAusgeben();
-        System.out.println("Logbuch Einträge:");
-        ArrayList<String> logbuchEintraege = meinRaumschiff.eintraegeLogbuchZurueckgeben();
-        for (String eintrag : logbuchEintraege) {
-            System.out.println(eintrag);
-        }
 
 
         meinRaumschiff.photonentorpedoSchiessen(zielRaumschiff);
@@ -172,10 +165,11 @@ public class Raumschiff extends Ladung {
     }
 
 
-
     public void nachrichtAnAlle(String message) {
+        System.out.println("##########");
         broadcastKommunikator.add(message);
         logbuchEintraege.add(message);
+
     }
 
 
@@ -193,6 +187,7 @@ public class Raumschiff extends Ladung {
     }
 
     public void zustandRaumschiff() {
+        System.out.println("-------------");
         System.out.println("Zustand des Raumschiffs: " + getSchiffsname());
         System.out.println("Photonentorpedo Anzahl: " + getPhotonentorpedoAnzahl());
         System.out.println("Energieversorgung in Prozent: " + getEnergieversorgungInProzent() + "%");
@@ -200,19 +195,14 @@ public class Raumschiff extends Ladung {
         System.out.println("Hülle in Prozent: " + getHuelleInProzent() + "%");
         System.out.println("Lebenserhaltungssysteme in Prozent: " + getLebenserhaltungssystemeInProzent() + "%");
         System.out.println("Anzahl Androiden: " + getAndroidenAnzahl());
-        System.out.println("Ladungsverzeichnis: ");
-        ladungsverzeichnisAusgeben();
-        System.out.println("Logbuch Einträge: ");
-        for (String eintrag : eintraegeLogbuchZurueckgeben()) {
-            System.out.println(eintrag);
-        }
+        System.out.println("-------------");
     }
 
 
     public void ladungsverzeichnisAusgeben() {
-        System.out.println("Ladungsverzeichnis:");
+        System.out.print("Ladungsverzeichnis:");
         for (Ladung ladung : ladungsverzeichnis) {
-            System.out.println("Bezeichnung: " + ladung.getBezeichnung() + ", Menge: " + ladung.getMenge());
+            System.out.println(" Bezeichnung: " + ladung.getBezeichnung() + ", Menge: " + ladung.getMenge());
         }
     }
 
