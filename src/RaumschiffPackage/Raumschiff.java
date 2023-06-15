@@ -175,11 +175,12 @@ public class Raumschiff extends Ladung {
 
     public void nachrichtAnAlle(String message) {
         broadcastKommunikator.add(message);
+        logbuchEintraege.add(message);
     }
 
 
     public ArrayList<String> eintraegeLogbuchZurueckgeben() {
-        return broadcastKommunikator;
+        return logbuchEintraege;
     }
 
     public void photonentorpedosLaden(int anzahlTorpedos) {
@@ -209,7 +210,7 @@ public class Raumschiff extends Ladung {
 
 
     public void ladungsverzeichnisAusgeben() {
-       System.out.println("Ladungsverzeichnis:");
+        System.out.println("Ladungsverzeichnis:");
         for (Ladung ladung : ladungsverzeichnis) {
             System.out.println("Bezeichnung: " + ladung.getBezeichnung() + ", Menge: " + ladung.getMenge());
         }
@@ -218,8 +219,6 @@ public class Raumschiff extends Ladung {
     public void ladungsverzeichnisAufraeumen() {
         ladungsverzeichnis.clear();
     }
-
-
 
 }
 
